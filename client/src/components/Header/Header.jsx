@@ -10,7 +10,7 @@ import Typography from "components/Typography";
 import CssBaseline from "components/CssBaseline";
 
 
-const navItems = [...Object.keys(PAGES)];
+const navItems = [...Object.values(PAGES)];
 
 const Header = () =>{
 
