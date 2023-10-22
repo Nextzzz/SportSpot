@@ -55,14 +55,35 @@ namespace SportSpotAPI.Controllers
 
             _authService.RegisterUser(user);
 
-            UserModel? loggedInUser = _authService.LoginUser(user.Email, user.Password);
-
-            if (loggedInUser != null)
+            try
             {
-                return Ok(loggedInUser);
+                UserModel? loggedInUser = _authService.LoginUser(user.Email, user.Password);
+                if (loggedInUser != null)
+                {
+                    return Ok(loggedInUser);
+                }
+            }
+            catch(Exception ex) 
+            {
+                return BadRequest(new { message = ex.Message });
             }
 
             return BadRequest(new { message = "User registration unsuccessful" });
+        }
+
+        // PUT: auth/activate/id:int
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult Activate(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest(new { message = "Wrong id" });
+            }
+
+            var status = _authService.ActivateUser(id);
+
+            return Ok(new { status });
         }
     }
 }

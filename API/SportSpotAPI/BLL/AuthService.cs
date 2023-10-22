@@ -1,7 +1,9 @@
 ﻿using BLL.Abstractions;
+using CORE.Helpers;
 using CORE.Models;
 using CORE.NewFolder;
 using DAL.Abstractions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -15,10 +17,12 @@ namespace BLL
     public class AuthService : IAuthService
     {
         private readonly IUserIdentityRepository<UserIdentity> _userIdentityRepository;
+        private readonly IConfiguration _configuration;
 
-        public AuthService(IUserIdentityRepository<UserIdentity> userIdentityRepository)
+        public AuthService(IConfiguration configuration,IUserIdentityRepository<UserIdentity> userIdentityRepository)
         {
             _userIdentityRepository = userIdentityRepository;
+            _configuration = configuration;
         }
 
         public UserModel? LoginUser(string email, string password)
@@ -31,7 +35,7 @@ namespace BLL
                 return null;
             }
 
-            var userModel = new UserModel(userIdentity.Email ?? "", userIdentity.Password, userIdentity.IsAdmin);
+            var userModel = new UserModel(userIdentity.Id, userIdentity.Email, userIdentity.Password, userIdentity.IsAdmin);
 
             if (userIdentity.IsEmailVerified) 
             {
@@ -44,7 +48,7 @@ namespace BLL
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                    new Claim(ClaimTypes.Email, userIdentity.Email ?? ""),
+                    new Claim(ClaimTypes.Email, userIdentity.Email),
                     new Claim(ClaimTypes.Role, userIdentity.IsAdmin.ToString())
                     }),
                     IssuedAt = DateTime.UtcNow,
@@ -56,6 +60,16 @@ namespace BLL
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 userModel.Token = tokenHandler.WriteToken(token);
+                userModel.IsEmailVerified = true;
+            }
+            else
+            {
+                var mailFrom = _configuration.GetValue<string>("EmailCredentials:Email");
+                var pass = _configuration.GetValue<string>("EmailCredentials:Password");
+                var mailTo = userIdentity.Email;
+
+                userModel.ConfirmationCode = EmailSenderHelper.SendConfirmation(mailFrom, pass, mailTo);
+                userModel.IsEmailVerified = false;
             }
 
             return userModel;
@@ -63,7 +77,6 @@ namespace BLL
 
         public void RegisterUser(RegisterUser user)
         {
-
             var userIdentity = new UserIdentity()
             {
                 Email = user.Email,
@@ -73,6 +86,12 @@ namespace BLL
             };
 
             _userIdentityRepository.Add(userIdentity);
+        }
+
+        public bool ActivateUser(int id)
+        {
+            var response = _userIdentityRepository.ActivateUser(id);
+            return response.Status;
         }
     }
 }

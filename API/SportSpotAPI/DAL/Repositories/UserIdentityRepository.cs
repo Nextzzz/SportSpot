@@ -107,6 +107,44 @@ namespace DAL.Repositories
             }
         }
 
+        public Response<UserIdentity> ActivateUser(int id)
+        {
+            Response<UserIdentity> response = new Response<UserIdentity>();
+            using (var connection = new SqlConnection(_connectingString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var command = new SqlCommand($"UPDATE {nameof(UserIdentity)} SET [IsEmailVerified] = 1 WHERE [Id] = {id}", connection);
+
+                    if (command.ExecuteNonQuery() == 0)
+                    {
+                        response.Message = "This User does not exist!";
+                        response.Status = true;
+
+                        return response;
+                    }
+
+                    response.Message = "User successfully modified";
+                    response.Status = true;
+
+                    return response;
+                }
+                catch
+                {
+                    response.Message = "Error when confirmation User!";
+                    response.Status = false;
+
+                    return response;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
         public Response<UserIdentity> Delete(int id)
         {
             throw new NotImplementedException();

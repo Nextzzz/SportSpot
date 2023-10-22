@@ -8,5 +8,7 @@ namespace BLL.Abstractions
         UserModel? LoginUser(string email, string password);
 
         void RegisterUser(RegisterUser user);
+
+        bool ActivateUser(int id);
     }
 }
