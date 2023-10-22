@@ -1,1 +1,1 @@
-// export const PRODUCTS = 'products';
+export const PRODUCTS = 'products';
