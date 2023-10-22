@@ -4,14 +4,14 @@ namespace DAL.Abstractions
 {
     public interface IGenericRepository<T>
     {
-        Response<T> Add(string tableName, T entity);
+        Response<T> Add(T entity);
 
-        Response<T> Delete(string tableName, int id);
+        Response<T> Delete(int id);
 
-        Response<T> Update(string tableName, T entity);
+        Response<T> Update(T entity);
 
-        Response<T> Get(string tableName, int id);
+        Response<T> Get(int id);
 
-        Response<List<T>> GetAll(string tableName);
+        Response<List<T>> GetAll();
     }
 }

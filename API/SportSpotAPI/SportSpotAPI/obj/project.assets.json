@@ -486,6 +486,20 @@
           }
         }
       },
+      "BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CORE": "1.0.0",
+          "DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BLL.dll": {}
+        }
+      },
       "CORE/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1388,6 +1402,11 @@
         "version.txt"
       ]
     },
+    "BLL/1.0.0": {
+      "type": "project",
+      "path": "../BLL/BLL.csproj",
+      "msbuildProject": "../BLL/BLL.csproj"
+    },
     "CORE/1.0.0": {
       "type": "project",
       "path": "../CORE/CORE.csproj",
@@ -1401,6 +1420,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BLL >= 1.0.0",
       "CORE >= 1.0.0",
       "DAL >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.23",
@@ -1446,6 +1466,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "B:\\documents\\prog\\c#\\SportSpot\\API\\SportSpotAPI\\BLL\\BLL.csproj": {
+              "projectPath": "B:\\documents\\prog\\c#\\SportSpot\\API\\SportSpotAPI\\BLL\\BLL.csproj"
+            },
             "B:\\documents\\prog\\c#\\SportSpot\\API\\SportSpotAPI\\CORE\\CORE.csproj": {
               "projectPath": "B:\\documents\\prog\\c#\\SportSpot\\API\\SportSpotAPI\\CORE\\CORE.csproj"
             },
