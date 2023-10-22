@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /API/SportSpotAPI/SportSpotAPI/appsettings.json
 /API/SportSpotAPI/.vs/SportSpotAPI/v17/.suo
+/API/SportSpotAPI/SportSpotAPI/appsettings.json
