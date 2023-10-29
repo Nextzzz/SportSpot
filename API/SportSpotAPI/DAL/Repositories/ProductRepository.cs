@@ -78,6 +78,15 @@ namespace DAL.Repositories
 
                         product.Price = reader.GetDecimal(4);
 
+                        try
+                        {
+                            product.Rating = reader.GetInt32(5);
+                        }
+                        catch
+                        {
+                            product.Rating = 0;
+                        }
+
                         reader.Close();
 
                         response.Data = product;
@@ -127,8 +136,17 @@ namespace DAL.Repositories
                         Product product = new Product()
                         {
                             Id = reader.GetInt32(0),
-                            Price = reader.GetDecimal(4)
+                            Price = reader.GetDecimal(4),
                         };
+
+                        try
+                        {
+                            product.Rating = reader.GetInt32(5);
+                        }
+                        catch
+                        {
+                            product.Rating = 0;
+                        }
 
                         try
                         {
