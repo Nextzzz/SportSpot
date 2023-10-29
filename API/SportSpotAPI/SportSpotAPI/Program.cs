@@ -1,6 +1,6 @@
 using BLL;
 using BLL.Abstractions;
-using CORE.NewFolder;
+using CORE.Entities;
 using DAL.Abstractions;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -37,6 +37,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserIdentityRepository<UserIdentity>, UserIdentityRepository>(provider => new UserIdentityRepository(connectionString));
+builder.Services.AddTransient<IGenericRepository<Product>, ProductRepository>(provider => new ProductRepository(connectionString));
+builder.Services.AddTransient<IGenericRepository<User>, UserRepository>(provider => new UserRepository(connectionString));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

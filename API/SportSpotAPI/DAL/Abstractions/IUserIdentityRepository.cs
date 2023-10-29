@@ -1,4 +1,4 @@
-﻿using CORE.NewFolder;
+﻿using CORE.Entities;
 using CORE.Response;
 
 namespace DAL.Abstractions

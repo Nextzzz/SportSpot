@@ -1,4 +1,4 @@
-﻿using CORE.NewFolder;
+﻿using CORE.Entities;
 using CORE.Response;
 using DAL.Abstractions;
 using System.Data.SqlClient;

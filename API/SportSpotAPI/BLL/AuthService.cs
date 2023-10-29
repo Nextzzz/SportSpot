@@ -1,7 +1,7 @@
 ﻿using BLL.Abstractions;
 using CORE.Helpers;
 using CORE.Models;
-using CORE.NewFolder;
+using CORE.Entities;
 using DAL.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

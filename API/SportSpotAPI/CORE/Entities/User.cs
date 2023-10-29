@@ -1,6 +1,6 @@
 ﻿using CORE.Abstractions;
 
-namespace CORE.NewFolder
+namespace CORE.Entities
 {
     public class User : BaseEntity
     {
