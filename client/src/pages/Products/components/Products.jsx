@@ -2,10 +2,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import '../styles/products.css'
 import ProductCard from "components/ProductCard";
-import {Backdrop, CircularProgress, Grid} from "@mui/material";
+import {Backdrop, CircularProgress, Grid, Modal} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import ActionsProducts from 'pages/Products/actions/products';
+
 
 const Products = () => {
 
