@@ -8,11 +8,25 @@ import Box from "components/Box";
 import Toolbar from "components/Toolbar";
 import Typography from "components/Typography";
 import CssBaseline from "components/CssBaseline";
+import {useDispatch, useSelector} from "react-redux";
+import useChangePage from "../../hooks/useChangePage";
+import {useEffect} from "react";
+import {fetchSignOut} from "../../app/actions/user";
+import {Avatar} from "@mui/material";
 
 
 const navItems = [...Object.values(PAGES)];
 
 const Header = () =>{
+    const user = useSelector(({ user }) => user);
+    const dispatch = useDispatch();
+    const handleLogOutClick = () => {
+        dispatch(fetchSignOut())
+    };
+
+    const handleProfileClick = () => {
+        console.log('avatar')
+    }
 
     return (
         <header className='header'>
@@ -23,9 +37,15 @@ const Header = () =>{
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             SportSpot
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {(!user.isAuthorized) ? null :
+                            <Button color="inherit" onClick={handleLogOutClick}>
+                                Logout
+                            </Button>
+                        }
+
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             {navItems.map((item) => (
+                                (item === PAGES.LOGIN && user.isAuthorized) ? null :
                                 <Button href={`${config.BASE_FRONTEND_URL}/${item}`} key={item} sx={{ color: '#fff' }}>
                                     {item}
                                 </Button>
