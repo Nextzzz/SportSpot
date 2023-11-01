@@ -1,8 +1,8 @@
 const configs = {
-    BASE_URL: 'http://localhost:7274',
+    BASE_URL: 'https://localhost:7274',
     BASE_FRONTEND_URL: 'http://localhost:3000',
     USERS_SERVICE: '/Auth/Login',
-    PRODUCTS_SERVICE: '/products',
+    PRODUCTS_SERVICE: '/Product/GetAll',
     PROFILE_SERVICE: '/profile'
 }
 

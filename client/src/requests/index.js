@@ -87,10 +87,13 @@ import {
     params,
     url,
   }) => {
+    console.log(params)
+    console.log(url)
     return fetchGet({
       params,
       url,
     }).then((response) => {
+      console.log(response)
       if (response.ok) {
         return response.json();
       }

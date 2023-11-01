@@ -25,7 +25,7 @@ const getProfile = ({ url }) => {
                 profile: {
                     name: "Yarik",
                     surname: "Popovych",
-                    email: "amerser309@gmail.com"
+                    email: "email1@gmail.com"
                 }
             }
         });

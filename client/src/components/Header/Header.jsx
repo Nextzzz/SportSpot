@@ -45,7 +45,8 @@ const Header = () =>{
 
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             {navItems.map((item) => (
-                                (item === PAGES.LOGIN && user.isAuthorized) ? null :
+                                ((item === PAGES.LOGIN && user.isAuthorized)
+                                || (item === PAGES.PROFILE && !user.isAuthorized)) ? null :
                                 <Button href={`${config.BASE_FRONTEND_URL}/${item}`} key={item} sx={{ color: '#fff' }}>
                                     {item}
                                 </Button>
