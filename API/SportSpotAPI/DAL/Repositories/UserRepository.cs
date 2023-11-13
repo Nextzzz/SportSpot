@@ -117,9 +117,47 @@ namespace DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Response<User> Update(User entity)
+        public Response<List<User>> GetAll(int userId)
         {
             throw new NotImplementedException();
+        }
+
+        public Response<User> Update(User entity)
+        {
+            Response<User> response = new Response<User>();
+            using (var connection = new SqlConnection(_connectingString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var command = new SqlCommand($"UPDATE [User] SET [FirstName] = '{entity.FirstName}', [LastName] = '{entity.LastName}', [PhoneNumber] = '{entity.PhoneNumber}', [Address] = '{entity.Address}' WHERE [Id] = '{entity.Id}'", connection);
+
+                    if (command.ExecuteNonQuery() == 0)
+                    {
+                        response.Message = "This User does not exist!";
+                        response.Status = true;
+
+                        return response;
+                    }
+
+                    response.Message = "User successfully modified";
+                    response.Status = true;
+
+                    return response;
+                }
+                catch
+                {
+                    response.Message = "Error when updating User!";
+                    response.Status = false;
+
+                    return response;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }

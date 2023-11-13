@@ -205,6 +205,105 @@ namespace DAL.Repositories
             }
         }
 
+        public Response<List<Product>> GetAll(int userId)
+        {
+            Response<List<Product>> response = new Response<List<Product>>() { Data = new List<Product>() };
+            using (var connection = new SqlConnection(_connectingString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    List<UserWishListItem> favourites = new List<UserWishListItem>();
+                    var favouriteCommand = new SqlCommand($"SELECT * FROM [UserWishList] WHERE UserId = {userId}", connection);
+                    var favouritesReader = favouriteCommand.ExecuteReader();
+
+                    while (favouritesReader.Read())
+                    {
+                        favourites.Add(new UserWishListItem() { UserId = favouritesReader.GetInt32(0), ProductId = favouritesReader.GetInt32(1) });
+                    }
+
+                    favouritesReader.Close();
+
+                    var command = new SqlCommand($"SELECT * FROM [Product]", connection);
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Product product = new Product()
+                        {
+                            Id = reader.GetInt32(0),
+                            Price = reader.GetDecimal(4),
+                        };
+
+                        try
+                        {
+                            product.Rating = reader.GetInt32(5);
+                        }
+                        catch
+                        {
+                            product.Rating = 0;
+                        }
+
+                        try
+                        {
+                            product.Name = reader.GetString(1);
+                        }
+                        catch
+                        {
+                            product.Name = null;
+                        }
+
+                        try
+                        {
+                            product.Description = reader.GetString(2);
+                        }
+                        catch
+                        {
+                            product.Description = null;
+                        }
+
+                        try
+                        {
+                            product.PhotoUrl = reader.GetString(3);
+                        }
+                        catch
+                        {
+                            product.PhotoUrl = null;
+                        }
+
+                        product.IsFavourite = favourites.FirstOrDefault(f => f.ProductId == product.Id) != null;
+
+                        response.Data.Add(product);
+                    }
+
+                    if (response.Data.Count == 0)
+                    {
+                        response.Message = "There are no records in the database!";
+                    }
+                    else
+                    {
+                        response.Message = "Products successfully found";
+                    }
+
+                    response.Status = true;
+
+                    return response;
+                }
+                catch
+                {
+                    response.Message = "Error when finding products!";
+                    response.Status = false;
+
+                    return response;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
         public Response<Product> Update(Product entity)
         {
             throw new NotImplementedException();

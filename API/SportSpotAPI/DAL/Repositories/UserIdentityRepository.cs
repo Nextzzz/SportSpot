@@ -164,5 +164,10 @@ namespace DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Response<List<UserIdentity>> GetAll(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

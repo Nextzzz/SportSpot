@@ -39,6 +39,7 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserIdentityRepository<UserIdentity>, UserIdentityRepository>(provider => new UserIdentityRepository(connectionString));
 builder.Services.AddTransient<IGenericRepository<Product>, ProductRepository>(provider => new ProductRepository(connectionString));
 builder.Services.AddTransient<IGenericRepository<User>, UserRepository>(provider => new UserRepository(connectionString));
+builder.Services.AddTransient<IUserWishListRepository, UserWishListRepository>(provider => new UserWishListRepository(connectionString));
 
 
 builder.Services.AddControllers();

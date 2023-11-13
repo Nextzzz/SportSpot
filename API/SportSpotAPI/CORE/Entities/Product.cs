@@ -9,5 +9,6 @@ namespace CORE.Entities
         public string? PhotoUrl { get; set; }
         public decimal Price { get; set; }
         public int Rating { get; set; }
+        public bool IsFavourite { get; set; }
     }
 }

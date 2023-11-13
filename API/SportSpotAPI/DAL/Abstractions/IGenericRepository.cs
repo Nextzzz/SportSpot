@@ -1,4 +1,5 @@
-﻿using CORE.Response;
+﻿using CORE.Entities;
+using CORE.Response;
 
 namespace DAL.Abstractions
 {
@@ -13,5 +14,7 @@ namespace DAL.Abstractions
         Response<T> Get(int id);
 
         Response<List<T>> GetAll();
+
+        Response<List<T>> GetAll(int userId);
     }
 }

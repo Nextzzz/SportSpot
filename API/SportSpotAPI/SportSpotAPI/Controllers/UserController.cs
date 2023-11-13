@@ -21,5 +21,14 @@ namespace SportSpotAPI.Controllers
             var userResponse = _userRepository.Get(id);
             return Ok(userResponse.Data);
         }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] User user)
+        {
+            var responce = _userRepository.Update(user);
+
+            return Ok(responce);
+        }
     }
 }
