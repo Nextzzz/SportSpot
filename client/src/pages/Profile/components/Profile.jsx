@@ -3,6 +3,7 @@ import {Backdrop, CircularProgress, List, ListItem, ListItemButton, ListItemText
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import ActionsProfile from "../../Profile/actions/profile";
+import Button from "../../../components/Button/Button";
 
 const Profile = () => {
 
@@ -58,6 +59,16 @@ const Profile = () => {
                                     <ListItemText primary={`email: ${profile.profile.email}`} />
                                 </ListItemButton>
                             </ListItem>
+                            <label htmlFor="start">Date:</label>
+
+                            <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"
+                                   max="2018-12-31"/>
+                            <br />
+                            <Button
+                                variant="contained"
+                            >
+                                Update
+                            </Button>
                         </>
                     )
                 }

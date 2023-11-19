@@ -17,6 +17,7 @@ import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded
 import React, {useState} from "react";
 import Tooltip from '@mui/material/Tooltip';
 import Box from "@mui/material/Box";
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 
 
 const style = {
@@ -36,11 +37,20 @@ const ProductCard = ({
                          description,
                          price,
                          rate,
-                         image
+                         image,
+                         like
                      }) => {
     const [openModal, setOpenModal] = useState(false);
     const handleOpenModal = () => setOpenModal(true);
     const handleCloseModal = () => setOpenModal(false);
+
+    const handleCartClick = () => {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        cart.push({name, price})
+        localStorage.setItem('cart',
+            JSON.stringify(cart)
+        );
+    }
 
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -73,7 +83,11 @@ const ProductCard = ({
                 <Tooltip title="Add to Favourite">
                     <IconButton >
                         <Badge color="secondary">
-                            <FavoriteBorderIcon />
+                            {
+                                like === true ? <FavoriteRoundedIcon />
+                                    : <FavoriteBorderIcon />
+                            }
+
                         </Badge>
                     </IconButton>
                 </Tooltip>
@@ -152,7 +166,7 @@ const ProductCard = ({
                             loading="lazy"
                         />
                     </ImageListItem>
-                    <Button variant="contained" color="success">
+                    <Button variant="contained" color="success" onClick={handleCartClick}>
                         Add to Cart
                     </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;

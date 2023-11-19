@@ -64,6 +64,7 @@ const Products = () => {
                                         price={topic.price}
                                         rate={topic.rating}
                                         image={topic.photoUrl}
+                                        like={topic.like}
                                     />
                                 )}
                             )

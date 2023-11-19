@@ -13,6 +13,7 @@ import useChangePage from "../../hooks/useChangePage";
 import {useEffect} from "react";
 import {fetchSignOut} from "../../app/actions/user";
 import {Avatar} from "@mui/material";
+import {FAVOURITES} from "constants/pages";
 
 
 const navItems = [...Object.values(PAGES)];
@@ -46,7 +47,9 @@ const Header = () =>{
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             {navItems.map((item) => (
                                 ((item === PAGES.LOGIN && user.isAuthorized)
-                                || (item === PAGES.PROFILE && !user.isAuthorized)) ? null :
+                                || (item === PAGES.PROFILE && !user.isAuthorized)
+                                || (item === PAGES.FAVOURITES && !user.isAuthorized)
+                                || (item === PAGES.CART && !user.isAuthorized)) ? null :
                                 <Button href={`${config.BASE_FRONTEND_URL}/${item}`} key={item} sx={{ color: '#fff' }}>
                                     {item}
                                 </Button>
