@@ -16,6 +16,7 @@ import Profile from "../../pages/Profile";
 import Cart from "../../pages/Cart";
 import FilterProducts from "../../pages/FilterProducts";
 import CompareProducts from '../../pages/CompareProducts';
+import ProductComment from '../../pages/ProductComment';
 
 const App = () => {
     const [state, setState] = useState({
@@ -44,6 +45,7 @@ const App = () => {
                         <Route path={`/${PAGES.CART}`} element={<Cart />} />
                         <Route path={`/${PAGES.FILTER_PRODUCTS}`} element={<FilterProducts />} />
                         <Route path={`/${PAGES.COMPARE_PRODUCTS}`} element={<CompareProducts />} />
+                        <Route path={`/comment`} element={<ProductComment />} />
                     </Routes>
                 )}
             </Router>

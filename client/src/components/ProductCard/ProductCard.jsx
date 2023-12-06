@@ -65,6 +65,11 @@ const ProductCard = ({
         );
     }
 
+    const handleComment = () => {
+        console.log('comment');
+        window.location.replace('http://localhost:3000/comment?name=' + name);
+    }
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea sx={{ height: '50vh', overflow: 'auto' }}>
@@ -188,6 +193,10 @@ const ProductCard = ({
                     </Button>
                     <Button variant="contained" onClick={handleCompareClick}>
                         Compare
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button variant="contained" color="error" onClick={handleComment}>
+                        Comment
                     </Button>
 
                 </Box>
