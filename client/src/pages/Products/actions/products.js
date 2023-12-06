@@ -57,7 +57,7 @@ const getProducts = ({ url }) => {
                         id: 4,
                         name: 'True Whey',
                         description: 'True Whey Protein is a whey protein concentrate (WPC) that is among the most popular protein supplements.',
-                        price: '9.00 $',
+                        price: '9.50 $',
                         rating: '4.3',
                         like: false,
                         category: 'protein',

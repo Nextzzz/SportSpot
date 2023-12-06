@@ -61,8 +61,8 @@ const Profile = () => {
                             </ListItem>
                             <label htmlFor="start">Date:</label>
 
-                            <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"
-                                   max="2018-12-31"/>
+                            <input type="date" id="start" name="trip-start"  min="2018-01-01"
+                                   />
                             <br />
                             <Button
                                 variant="contained"

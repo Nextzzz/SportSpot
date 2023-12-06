@@ -14,6 +14,8 @@ import {useDispatch} from "react-redux";
 import {fetchUser} from "../actions/user";
 import Profile from "../../pages/Profile";
 import Cart from "../../pages/Cart";
+import FilterProducts from "../../pages/FilterProducts";
+import CompareProducts from '../../pages/CompareProducts';
 
 const App = () => {
     const [state, setState] = useState({
@@ -40,6 +42,8 @@ const App = () => {
                         <Route path={`/${PAGES.PROFILE}`} element={<Profile />} />
                         <Route path={`/${PAGES.FAVOURITES}`} element={<Favourites />} />
                         <Route path={`/${PAGES.CART}`} element={<Cart />} />
+                        <Route path={`/${PAGES.FILTER_PRODUCTS}`} element={<FilterProducts />} />
+                        <Route path={`/${PAGES.COMPARE_PRODUCTS}`} element={<CompareProducts />} />
                     </Routes>
                 )}
             </Router>

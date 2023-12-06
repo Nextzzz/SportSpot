@@ -52,6 +52,19 @@ const ProductCard = ({
         );
     }
 
+    const handleCompareClick = () => {
+        console.log('compare');
+        let compare = JSON.parse(localStorage.getItem('compare'));
+        console.log(compare);
+        if (compare == null) compare = [];
+        compare.push({name, price, rate})
+        let newCompare = compare.splice(-2)
+        console.log(newCompare);
+        localStorage.setItem('compare',
+          JSON.stringify(newCompare)
+        );
+    }
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea sx={{ height: '50vh', overflow: 'auto' }}>
@@ -172,6 +185,9 @@ const ProductCard = ({
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <Button variant="contained" color="warning">
                         Add to Favourites
+                    </Button>
+                    <Button variant="contained" onClick={handleCompareClick}>
+                        Compare
                     </Button>
 
                 </Box>
