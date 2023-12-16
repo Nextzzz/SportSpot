@@ -33,6 +33,7 @@ const style = {
 };
 
 const ProductCard = ({
+                         id,
                          name,
                          description,
                          price,
@@ -46,7 +47,7 @@ const ProductCard = ({
 
     const handleCartClick = () => {
         let cart = JSON.parse(localStorage.getItem('cart'));
-        cart.push({name, price})
+        cart.push({name, price, id})
         localStorage.setItem('cart',
             JSON.stringify(cart)
         );

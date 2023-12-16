@@ -59,6 +59,7 @@ const Products = () => {
                             products.list.map(topic => {
                                 return (
                                     <ProductCard
+                                        id={topic.id}
                                         name={topic.name}
                                         description={topic.description}
                                         price={topic.price}

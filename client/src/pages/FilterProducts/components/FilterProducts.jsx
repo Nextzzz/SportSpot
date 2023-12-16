@@ -176,7 +176,7 @@ const FilterProducts = () => {
                     columns={columns}
                     pageSize={5}
                     // rowsPerPageOptions={[5, 10, 20]}
-                    // checkboxSelection
+                    checkboxSelection
                     filterModel={filterModel}
                     onFilterModelChange={(model) => setFilterModel(model)}
                 />
